@@ -1,0 +1,14 @@
+<div class="container">
+    <div *ngIf='readTheDay()'>
+        {{selectedDay}}
+    </div><br>
+
+    <div>
+        <!-- Dodawanie wydarzenia - pole obecne w kazdym dniu takie samo -->
+        <input type='time' class="inputs" [(ngModel)]="newEvent.hour" ><input type='text' class="inputs" [(ngModel)]="newEvent.content" ><button (click)='addEvent()'class="inputs">Add event</button>
+    </div><br>
+
+    <div>
+        <!-- Miejsce na zczytanie z API listy wydarzeń dla tego dnia - pole aktualizowane w zaleznosci od dnia, moze komponent nowy -->
+    </div>
+</div>
