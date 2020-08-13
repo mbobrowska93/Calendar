@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventsService } from '../events.service';
 import { Plan } from '../plan';
+import { Details } from '../details';
 
 @Component({
   selector: 'app-details',
@@ -11,25 +12,34 @@ import { Plan } from '../plan';
 export class DetailsComponent implements OnInit {
 
   public selectedDay: string;
-  public newEvent: Plan;
+  public day: Plan;
   public hour: string;
   public content: string;
+  public newEvent: Details; // obiekt wydarzenia dla danego dnia z godzinami i contentem
+  public myArray: Details[];
+  public daysArray: Plan[] = [];
+  public myDay: Plan; // wybrany dzien
 
   constructor(private router: Router, private eventsService: EventsService) { }
 
-  ngOnInit(): void {
-    this.newEvent = { hour: 0, selectedDay: this.selectedDay, content: ''};
+  ngOnInit(): void { // gdy wybierzemy konkretny dzien to:
+
+    this.newEvent = {hour: 0, content: ''}; // wydarzenie
+    this.myDay = {selectedDay: this.selectedDay, events: []}; // dzien
+    // dodac warunek ze jesli juz jest to go nie dodawac !!
   }
 
   readTheDay(): boolean {
-    this.selectedDay = localStorage.getItem('selectedDay');
+    this.selectedDay = localStorage.getItem('selectedDay'); // pobranie nazwy kliknietego dnia
     return true;
   }
 
   addEvent() {
-    // dodanie do API nowego wydarzenia
-     this.eventsService.makeObject(this.newEvent.hour, this.selectedDay, this.newEvent.content);
-
+    this.eventsService.makeOurArray( this.myDay, this.newEvent); // przekazujemy do serwisu obiekt dnia i wydarzenia
+    // var indeks = this.daysArray.indexOf(this.myDay); // znajdujemy w tablicy nasz dzien i zwracamy jego indeks
+   //  this.daysArray[indeks].events.push(this.newEvent); // do konkretnego dnia, znalezionego przez indeks wrzucamy to nowe wydarzenie
+   var tablica = this.eventsService.returnDaysArray();
+    console.log('tablica dni:', tablica);
   }
 
 }

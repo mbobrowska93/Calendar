@@ -1,7 +1,8 @@
+import { Details } from './details';
+
 export class Plan {
     constructor(
-        public hour: number,
-        public selectedDay: string, // selectedDay
-        public content: string, // input
+        public selectedDay: string,
+        public events: Details[],
     ) {}
 }
