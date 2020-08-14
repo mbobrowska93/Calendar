@@ -15,14 +15,12 @@ export class CalendarComponent implements OnInit {
   public value: Date = new Date ('08/12/2020');
   public selectedDay: string;
   public myObject: Plan;
-  public tablicaDni: Plan[];
 
   constructor(private router: Router, private eventsService: EventsService) { }
 
   ngOnInit(): void {
     this.selectedDay = '';
     // this.myObject = {selectedDay: '', events: []}; // stworzenie pustego obiektu
-   //  this.tablicaDni = new Array(this.myObject); // stworzenie pustej tablicy dni
   }
 
   onValueChange(day: any) {

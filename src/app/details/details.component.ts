@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
 
 
   addEvent() {
-    this.selectedDay = localStorage.getItem('selectedDay'); 
+    this.selectedDay = localStorage.getItem('selectedDay');
     this.eventsService.makeOurArray(this.newEvent, this.selectedDay);
   }
 
