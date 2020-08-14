@@ -8,20 +8,17 @@ import { Details } from './details';
 export class EventsService {
 
   public daysArray: Plan[]; // tablica obiektow dni
+  public myDay: Plan; // wybrany dzien
 
   constructor() { }
 
-  makeDaysArray(daysArray) {
-    this.daysArray = daysArray;
-  }
-
-  makeOurArray(day: Plan,  newEvent: Details) {
-    let index = this.daysArray.indexOf(day);
-    this.daysArray[index].events.push(newEvent); // ERROR - EVENTS UNDEFINED !!!
-  }
-
-  returnDaysArray() {
-    return this.daysArray; // zwraca tablice dni
+  makeOurArray(newEvent: Details, name: string) {
+    console.log('Wybrany dzien:', name);
+    this.myDay = {selectedDay: name, events: []};
+    this.daysArray = new Array(this.myDay); // tworze tablice dni nową
+    console.log('Tablica dni:', this.daysArray);
+    let index = this.daysArray.indexOf(this.myDay);
+    this.daysArray[index].events.push(newEvent);
   }
 
 }

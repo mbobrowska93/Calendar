@@ -14,23 +14,21 @@ export class CalendarComponent implements OnInit {
   public maxDate: Date = new Date ('12/30/2025');
   public value: Date = new Date ('08/12/2020');
   public selectedDay: string;
-  public daysArray: Plan[]; // tablica dni, tablica obiektów dni
+  public myObject: Plan;
 
   constructor(private router: Router, private eventsService: EventsService) { }
 
   ngOnInit(): void {
-    this.daysArray = [];
+    this.selectedDay = '';
   }
 
   onValueChange(day: any) {
     this.selectedDay = day.value;
-    console.log(this.selectedDay);
+    console.log('wybrany dzien:', this.selectedDay); // OK
     localStorage.setItem('selectedDay', this.selectedDay);
-    // potem w momencie pobrania tej zmiennej niech nam stworzy obiekt
-    // po wybraniu dnia wysyla pustą tablice do serwisu
-    this.eventsService.makeDaysArray(this.daysArray);
   }
 
 
 
 }
+
