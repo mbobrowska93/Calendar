@@ -11,28 +11,15 @@ import { Details } from '../details';
 })
 export class DetailsComponent implements OnInit {
 
-  public selectedDay: string = '';
-  public day: Plan;
-  public hour: number;
-  public content: string;
-  public newEvent: Details; // obiekt wydarzenia dla danego dnia z godzinami i contentem
-  public eventsArray: Details[];
-  public daysArray: Plan[] = [];
+  public newEvent: Details;
 
   constructor(private router: Router, private eventsService: EventsService) { }
 
   ngOnInit(): void {
-      this.newEvent = {hour: 0, content: ''};
-      this.daysArray = this.eventsService.returnTablicaDni();
-      this.eventsArray = this.eventsService.returnTablicaWydarzen();
-      this.day = this.eventsService.returnObiektDnia();
+    this.newEvent = {hour: 0, content: ''};
   }
 
   addEvent() {
-    this.newEvent = new Details(this.hour, this.content);
-    var indeks = this.eventsService.returnIndeks();
-    this.daysArray[indeks].events.push(this.newEvent);
-    console.log('tablica dni:', this.daysArray);
-
-      }
+    this.eventsService.storeNewEvent(this.newEvent);
+  }
 }
