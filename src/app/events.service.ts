@@ -20,19 +20,18 @@ export class EventsService {
   }
 
   storeDayName(dayName: string) {
-    this.dayName = dayName; // nazwa wybranego dnia
-    this.day.selectedDay = this.dayName; // teraz nazwa mojego dnia jest taka jak wybrana
-    // this.daysArray[indeks].selectedDay = this.dayName;
-    this.daysArray.push(this.day); // dodaj ten dzien do tablicy dni
-    console.log(this.daysArray);
+    this.day = new Plan();
+    this.day.selectedDay = dayName; // teraz nazwa mojego dnia jest taka jak wybrana
+    this.daysArray.push(this.day); // dodaj ten dzien do tablicy dni // tu zamienia mi kazdy dzien na najnowszy
+    console.log(this.day.selectedDay);
+    console.log(this.daysArray); // OK - prawidlowo dodaje dni
   }
 
   storeNewEvent(newEvent: Details) {
-    let indeks = this.daysArray.indexOf(this.day);
+    this.indeks = this.daysArray.indexOf(this.day);
     // this.daysArray[indeks].events == this.eventsArray;
-    this.daysArray[indeks].events.push(newEvent);
-    
-    
+    this.daysArray[this.indeks].events.push(newEvent);
+    console.log(this.daysArray);
   }
 
 }
