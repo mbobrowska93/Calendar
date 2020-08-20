@@ -14,25 +14,24 @@ export class DetailsComponent implements OnInit {
   public newEvent: Details;
   public myDay: Plan;
   public eventsArray: Details[];
-  public dayEvents: Details[]; // moja tablica
+  public dayEvents: Details[];
   public showEventsArray: Details[];
 
   constructor(private router: Router, private eventsService: EventsService) { }
 
   ngOnInit(): void {
-    this.newEvent = {hour: '', content: ''};
-   // this.dayEvents = JSON.parse(localStorage.getItem('dayEvents'));
+     this.newEvent = {hour: '', content: ''};
+     // this.eventsArray = JSON.parse(localStorage.getItem('eventsArray'));
   }
 
   addEvent() {
-    this.myDay = this.eventsService.returnDayWithName(); // moj dzien z nazwa
-    this.newEvent = new Details('', ''); // !!!!!!!!!!
+    this.myDay = this.eventsService.returnDayWithName();
+    this.newEvent = new Details('', ''); // trzeba pozbyc sie dodawania "" po pierwszym CLICKK
     this.eventsService.storeNewEvent(this.newEvent);
     this.eventsArray = this.eventsService.returnEventsArray();
-    // this.eventsArray.push(this.newEvent);
-    // this.dayEvents.push(this.newEvent);
     this.myDay.events = this.eventsArray;
-    console.log('stan po dodaniu wydarzenia:', this.eventsArray);
+    console.log('tablica wydarzen:', this.eventsArray);
+    // localStorage.setItem('eventsArray', JSON.stringify(this.eventsArray));
     this.eventsService.addEvent(this.myDay).subscribe(day => {  console.log('day:', day); });
   }
 

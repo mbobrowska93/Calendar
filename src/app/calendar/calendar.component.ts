@@ -28,7 +28,7 @@ export class CalendarComponent implements OnInit {
   onValueChange(day: any) {
     this.newDay = new Date(day.value);
     var day = day.value.getDate();
-    var month: any = this.newDay.getMonth(); // dodac jedynke trzeba
+    var month: any = this.newDay.getMonth();
     month = month + 1;
     var year: any = this.newDay.getFullYear();
 
@@ -44,12 +44,10 @@ export class CalendarComponent implements OnInit {
     this.myDay.selectedDay = this.selectedDay;
     this.eventsService.storeDayName(this.myDay);
 
-    // Pobranie wydarzen tego dnia z API
     this.eventsService.getEvents(year, month, day).subscribe(day => {
-      // console.log('pobrany obiekt dnia:', day);
-      this.dayEvents = day.events;
-      console.log('tablica wydarzen tego dnia', this.dayEvents);
-      this.eventsService.storeEvents(this.dayEvents);
+    this.dayEvents = day.events;
+    console.log('tablica wydarzen tego dnia', this.dayEvents);
+    this.eventsService.storeEvents(this.dayEvents);
 
     });
   }

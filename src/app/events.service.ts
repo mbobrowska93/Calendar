@@ -9,15 +9,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EventsService {
 
-  public daysArray: Plan[]; // tablica obiektow dni
-  public day: Plan; // wybrany dzien
+  public daysArray: Plan[]; 
+  public day: Plan;
   public eventsArray: Details[];
   public indeks: number;
   public newEvent: Details;
 
   constructor(private http: HttpClient) {
-    this.eventsArray = []; // pusta tablica wydarzen
-    this.day = { selectedDay: '', events: [] }; // pusty obiekt z pusta tablica wydarzen
+    this.eventsArray = [];
+    this.day = { selectedDay: '', events: [] };
   }
 
   storeDayName(day: Plan) {
@@ -44,8 +44,6 @@ export class EventsService {
   addEvent(myDay: Plan): Observable<Plan> {
     return this.http.post<Plan>('http://calendar-teacher.azurewebsites.net/events', myDay);
   }
-
-  // this.indeks = this.daysArray.indexOf(this.day); // indeks zle dziala
 
   getEvents(year, month, day): Observable<Plan> {
     return this.http.get<Plan>('http://calendar-teacher.azurewebsites.net/events/byDate?year=' + year + '&month=' + month + '&day=' + day);
