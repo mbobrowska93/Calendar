@@ -1,6 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Plan } from './plan';
 import { Details } from './details';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,62 +13,40 @@ export class EventsService {
   public day: Plan; // wybrany dzien
   public eventsArray: Details[];
   public indeks: number;
-  public dayName: string;
+  public newEvent: Details;
 
-  constructor() {
-    this.daysArray = []; // pusta tablica dni
+  constructor(private http: HttpClient) {
     this.eventsArray = []; // pusta tablica wydarzen
-    this.day = {selectedDay: '', events: []}; // pusty obiekt z pusta tablica wydarzen
+    this.day = { selectedDay: '', events: [] }; // pusty obiekt z pusta tablica wydarzen
   }
 
-  storeDayName(dayName: string) {
-    this.day = new Plan();
-    this.day.selectedDay = dayName; // teraz nazwa mojego dnia jest taka jak wybrana
-    this.daysArray.push(this.day); // dodaj ten dzien do tablicy dni // tu zamienia mi kazdy dzien na najnowszy
-    console.log(this.day.selectedDay);
-    console.log(this.daysArray); // OK - prawidlowo dodaje dni
-  }
+  storeDayName(day: Plan) {
 
-  storeNewEvent(newEvent: Details) {
-    this.indeks = this.daysArray.indexOf(this.day);
-    // this.daysArray[indeks].events == this.eventsArray;
-    this.daysArray[this.indeks].events.push(newEvent);
-    console.log(this.daysArray);
-  }
-
-}
-
-
-
-
-
-
-[12, 5, 8, 130, 44]
-
-  /* storeData(daysArray, eventsArray, day) {
-    this.daysArray = daysArray;
-    this.eventsArray = eventsArray;
     this.day = day;
   }
 
-  returnDaysArray() {
-    return this.daysArray;
+  returnDayWithName() {
+    return this.day;
+  }
+
+  storeNewEvent(newEvent: Details) {
+    this.newEvent = newEvent;
+    this.eventsArray.push(this.newEvent);
   }
 
   returnEventsArray() {
     return this.eventsArray;
   }
 
-  returnDayObject() {
-    return this.day;
+  addEvent(myDay: Plan): Observable<Plan> {
+    return this.http.post<Plan>('http://calendar-teacher.azurewebsites.net/events', myDay);
   }
 
-  getIndeks(indeks: number) {
-    this.indeks = indeks;
+  // this.indeks = this.daysArray.indexOf(this.day); // indeks zle dziala
+
+  getEvents(year, month, day): Observable<Plan> {
+    return this.http.get<Plan>('http://calendar-teacher.azurewebsites.net/events/byDate?year=' + year + '&month=' + month + '&day=' + day);
   }
 
-  returnIndeks() {
-    return this.indeks;
-  } */
-
+}
 

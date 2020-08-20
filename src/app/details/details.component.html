@@ -7,5 +7,10 @@
 
     <div>
         <!-- Miejsce na zczytanie z API listy wydarzeń dla tego dnia - pole aktualizowane w zaleznosci od dnia, moze komponent nowy -->
+        <ol *ngIf='showEvents()' style="list-style-type: none">
+            <li *ngFor="let dayEvent of dayEvents">
+                {{dayEvent.hour}} - {{dayEvent.content}}
+            </li>
+        </ol>
     </div>
 </div>

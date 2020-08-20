@@ -9,6 +9,7 @@ import { EventsService } from './events.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule,
   ],
   providers: [EventsService],
   bootstrap: [AppComponent]
