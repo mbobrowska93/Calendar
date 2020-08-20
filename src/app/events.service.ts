@@ -28,6 +28,9 @@ export class EventsService {
   returnDayWithName() {
     return this.day;
   }
+  storeEvents(dayEvents: Details[]) {
+    this.eventsArray = dayEvents;
+  }
 
   storeNewEvent(newEvent: Details) {
     this.newEvent = newEvent;
@@ -47,6 +50,8 @@ export class EventsService {
   getEvents(year, month, day): Observable<Plan> {
     return this.http.get<Plan>('http://calendar-teacher.azurewebsites.net/events/byDate?year=' + year + '&month=' + month + '&day=' + day);
   }
+
+
 
 }
 

@@ -46,10 +46,10 @@ export class CalendarComponent implements OnInit {
 
     // Pobranie wydarzen tego dnia z API
     this.eventsService.getEvents(year, month, day).subscribe(day => {
-      console.log('pobrany obiekt dnia:', day);
+      // console.log('pobrany obiekt dnia:', day);
       this.dayEvents = day.events;
       console.log('tablica wydarzen tego dnia', this.dayEvents);
-      localStorage.setItem('dayEvents', JSON.stringify(this.dayEvents));
+      this.eventsService.storeEvents(this.dayEvents);
 
     });
   }
