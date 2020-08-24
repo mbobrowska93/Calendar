@@ -1,16 +1,26 @@
 <div class="container">
-    <div>
+    <div class="inputs">
         <!-- Dodawanie wydarzenia - pole obecne w kazdym dniu takie samo -->
-        <input type='time' class="inputs" [(ngModel)]="newEvent.hour" ><input type='text' class="inputs" [(ngModel)]="newEvent.content" ><button (click)='addEvent()'class="inputs">Add event</button>
+        <input type='time' [(ngModel)]="newEvent.hour" ><input type='text' [(ngModel)]="newEvent.content" ><button (click)='addEvent()'>Add event</button>
     </div><br>
 
+    <div class="hoursAndEvents">
+        <table class="table">
+            <thead>
+                <tr>
+                  <th>Hour</th>
+                  <th>Content</th>
+                  <th>Options</th>
+                </tr>
+            </thead>
+            <tbody *ngIf='showEvents()'>
+                <tr *ngFor="let dayEvent of eventsArray">
+                    <td>{{dayEvent.hour}}</td>
+                    <td>{{dayEvent.content}}</td>
+                    <td><button (click)='remove(dayEvent)'>X</button> &nbsp; <button (click)='edit(dayEvent)'>Edit</button></td>
+                  </tr>
+            </tbody> 
+        </table>
 
-    <div>
-        <!-- Miejsce na zczytanie z API listy wydarzeń dla tego dnia - pole aktualizowane w zaleznosci od dnia, moze komponent nowy -->
-        <ol *ngIf='showEvents()' style="list-style-type: none">
-            <li *ngFor="let dayEvent of eventsArray">
-                {{dayEvent.hour}} - {{dayEvent.content}}
-            </li>
-        </ol>
     </div>
 </div>

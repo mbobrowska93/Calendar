@@ -9,15 +9,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EventsService {
 
-  public daysArray: Plan[]; 
+  public daysArray: Plan[];
   public day: Plan;
   public eventsArray: Details[];
   public indeks: number;
   public newEvent: Details;
+  public myEditEvent: Details;
 
   constructor(private http: HttpClient) {
     this.eventsArray = [];
     this.day = { selectedDay: '', events: [] };
+    this.myEditEvent = {hour: '', content: ''};
   }
 
   storeDayName(day: Plan) {
@@ -49,6 +51,29 @@ export class EventsService {
     return this.http.get<Plan>('http://calendar-teacher.azurewebsites.net/events/byDate?year=' + year + '&month=' + month + '&day=' + day);
   }
 
+  removeEvent(dayEvent: Details) {
+    this.eventsArray = this.eventsArray.filter(x => x !== dayEvent);
+  }
+
+  editEvent(dayEvent: Details) {
+    this.myEditEvent = dayEvent;
+  }
+
+  returnEditEvent() {
+    return this.myEditEvent;
+  }
+
+  compareEvents(updatedEvent: Details) {
+      // pobranie obiektu z tablicy po jego id, ktore powinno byc takie same jak tego updatedItem
+      const EventToUpdate = this.eventsArray.find(this.findIndexToUpdate);
+      const index = this.eventsArray.indexOf(EventToUpdate);
+      this.eventsArray[index] = updatedEvent;
+    }
+
+  findIndexToUpdate(updatedEvent) {
+    // przyrownanie id
+    return updatedEvent.content === this;
+  }
 
 
 }

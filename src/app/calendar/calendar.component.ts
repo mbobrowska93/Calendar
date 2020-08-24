@@ -39,14 +39,13 @@ export class CalendarComponent implements OnInit {
       month = '0' + month;
     }
     this.selectedDay = year + '/' + month + '/' + day;
-    console.log('new Date:', this.selectedDay);
+    console.log('Day:', this.selectedDay);
     this.myDay = new Plan();
     this.myDay.selectedDay = this.selectedDay;
     this.eventsService.storeDayName(this.myDay);
 
     this.eventsService.getEvents(year, month, day).subscribe(day => {
     this.dayEvents = day.events;
-    console.log('tablica wydarzen tego dnia', this.dayEvents);
     this.eventsService.storeEvents(this.dayEvents);
 
     });

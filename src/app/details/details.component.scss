@@ -1,7 +1,22 @@
+$primary-color: rgb(255, 223, 228);
+$secondary-color: rgb(255, 83, 112);
+
 .container {
     padding: 5px;
 }
 
-.inputs {
+.container div input {
     margin-left: 5px;
+    border: 0.5px solid $secondary-color;
+}
+
+.container .inputs button {
+    margin-left: 5px;
+    border: 0.5px solid $secondary-color;
+    background-color: $primary-color;
+}
+
+.container .hoursAndEvents button {
+    border: 0.5px solid $secondary-color;
+    background-color: white;
 }

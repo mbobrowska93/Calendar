@@ -1,0 +1,6 @@
+<p>edit works!</p>
+<div *ngIf="getEvent()">
+<input type="time" [(ngModel)]='updateEvent.hour'> <input type="text"
+    [(ngModel)]="updateEvent.content"> <button (click)="updateThisEvent(updateEvent)">Update</button>
+</div>
+<router-outlet></router-outlet>

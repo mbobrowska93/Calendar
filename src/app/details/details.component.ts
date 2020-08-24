@@ -21,21 +21,36 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
      this.newEvent = {hour: '', content: ''};
+     // localStorage.setItem('eventsArray', JSON.stringify(this.eventsArray));
      // this.eventsArray = JSON.parse(localStorage.getItem('eventsArray'));
   }
 
   addEvent() {
     this.myDay = this.eventsService.returnDayWithName();
-    this.newEvent = new Details('', ''); // trzeba pozbyc sie dodawania "" po pierwszym CLICKK
-    this.eventsService.storeNewEvent(this.newEvent);
+    let ev = new Details(this.newEvent.hour, this.newEvent.content); // trzeba pozbyc sie dodawania "" po pierwszym CLICK
+    this.eventsService.storeNewEvent(ev);
     this.eventsArray = this.eventsService.returnEventsArray();
     this.myDay.events = this.eventsArray;
-    console.log('tablica wydarzen:', this.eventsArray);
-    // localStorage.setItem('eventsArray', JSON.stringify(this.eventsArray));
+    console.log('Day events:', this.eventsArray);
     this.eventsService.addEvent(this.myDay).subscribe(day => {  console.log('day:', day); });
   }
 
   showEvents(): boolean {
+    // this.showEventsArray = JSON.parse(localStorage.getItem('eventsArray'));
+    this.eventsArray = this.eventsService.returnEventsArray();
     return true;
   }
+
+  remove(dayEvent: Details) {
+    this.myDay = this.eventsService.returnDayWithName();
+    this.eventsService.removeEvent(dayEvent);
+    this.eventsArray = this.eventsService.returnEventsArray();
+    this.myDay.events = this.eventsArray;
+    this.eventsService.addEvent(this.myDay).subscribe(day => {  console.log('day:', day); });
+  }
+
+  edit(dayEvent: Details) {
+    this.eventsService.editEvent(dayEvent);
+  }
+
 }
