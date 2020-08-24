@@ -1,0 +1,10 @@
+.container div input {
+  margin-left: 5px;
+  border: 0.5px solid #ff5370;
+}
+
+.container div button {
+  margin-left: 5px;
+  border: 0.5px solid #ff5370;
+  background-color: #ffdfe4;
+}

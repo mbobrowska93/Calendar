@@ -32,8 +32,4 @@ export class EditComponent implements OnInit {
     this.eventsService.addEvent(myDay).subscribe(day => {  console.log('day:', day); });
   }
 
-
-
-
-
 }

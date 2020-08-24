@@ -1,0 +1,13 @@
+$primary-color: rgb(255, 223, 228);
+$secondary-color: rgb(255, 83, 112);
+
+.container div input {
+    margin-left: 5px;
+    border: 0.5px solid $secondary-color;
+}
+
+.container div button {
+    margin-left: 5px;
+    border: 0.5px solid $secondary-color;
+    background-color: $primary-color;
+}

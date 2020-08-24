@@ -1,1 +1,1 @@
-.container{display:flex;justify-content:space-around;flex-wrap:wrap}.container div{border:0.5px solid black;margin-top:10px}.details{width:500px}.edit{width:700px}
+.container{display:flex;justify-content:space-around;flex-wrap:wrap}.container div{border:0.5px solid #ff5370;margin-top:10px}.details{width:500px}.edit{width:700px;height:150px}

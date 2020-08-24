@@ -64,14 +64,12 @@ export class EventsService {
   }
 
   compareEvents(updatedEvent: Details) {
-      // pobranie obiektu z tablicy po jego id, ktore powinno byc takie same jak tego updatedItem
       const EventToUpdate = this.eventsArray.find(this.findIndexToUpdate);
       const index = this.eventsArray.indexOf(EventToUpdate);
       this.eventsArray[index] = updatedEvent;
     }
 
   findIndexToUpdate(updatedEvent) {
-    // przyrownanie id
     return updatedEvent.content === this;
   }
 
